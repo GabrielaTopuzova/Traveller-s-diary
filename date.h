@@ -16,8 +16,10 @@ public:
     void setMonth(size_t);
     void setYear(size_t);
 
+    Date();
     Date(size_t, size_t, size_t);
-    void print() const;
+    Date(const Date&);
+    void consolePrint() const;
 
     Date& operator=(const Date&);
     bool operator<=(const Date&) const;
