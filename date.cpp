@@ -92,3 +92,5 @@ istream& operator>>(istream& stream, Date& date) {
 ostream& operator<<(ostream& stream, const Date& date) {
     stream << date.day << date.month << date.year;
 }
+
+//test
