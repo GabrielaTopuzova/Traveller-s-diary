@@ -2,20 +2,25 @@
 #include "date.h"
 using namespace std;
 
-bool validDate(size_t day, size_t month, size_t year) {
-    if(year > 9999 || year < 0)
+size_t lastDayOfMonth(size_t month, size_t year) {
+    bool isLeap = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+    if (month == 4 || month == 6 || month == 9 || month == 11)
+        return 30;
+    if(month == 2 && isLeap)
+        return 29;
+    if(month == 2 && !isLeap)
+        return 28;
+    return 31;
+}
+bool Date::validDate(size_t day, size_t month, size_t year) {
+    if(year > 9999 || year < 0) 
         return false;
+
     if(month < 1 || month > 12)
         return false;
-    if(((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
-        if(month == 2)
-            if(day > 29)
-            return false;
-    if (month == 4 || month == 6 ||
-        month == 9 || month == 11)
-        if(day > 30)
-        return false;
-    if(day > 31 || day < 1)
+
+    size_t lastDay = lastDayOfMonth(month, year);
+    if(day > lastDay || day < 1)
         return false;
 
     return true;
@@ -81,7 +86,7 @@ istream& operator>>(istream& stream, Date& date) {
     size_t inputDay, inputMonth, inputYear;
     stream >> inputDay >> inputMonth >> inputYear;
 
-    if(!(validDate(inputDay, inputMonth, inputYear)))
+    if(!(date.validDate(inputDay, inputMonth, inputYear)))
         throw "Not valid Date";
         
     date.setDay(inputDay);
@@ -92,5 +97,3 @@ istream& operator>>(istream& stream, Date& date) {
 ostream& operator<<(ostream& stream, const Date& date) {
     stream << date.day << date.month << date.year;
 }
-
-//test

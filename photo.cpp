@@ -5,9 +5,19 @@ using namespace std;
 
 bool Photo::validPhoto(const char* photoName) const {
     for(size_t i = 0; i < strlen(photoName); i++)
-        //if(photoName[i] < "A")
-    return (strstr(name + strlen(name) - 4, "png") != nullptr) || 
-           (strstr(name + strlen(name) - 5, "jpeg") != nullptr);
+        if((photoName[i] < 'A' || photoName[i] > 'Z') && (photoName[i] < 'a' || 
+            photoName[i] > 'z') && photoName[i] != '_' && photoName[i] != '.')
+            return false;
+
+    size_t dotCount = 0;
+    for(size_t i = 0; i < strlen(photoName); i++)
+        if(photoName[i] == '.')
+            dotCount++;
+    if(dotCount != 1)
+        return false;
+        
+    return (strcmp(name + strlen(name) - 4, "png") == 0) || 
+           (strcmp(name + strlen(name) - 5, "jpeg") == 0);
 }
 
 char* Photo::getName() const {
