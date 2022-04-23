@@ -12,20 +12,9 @@ class User  {
     Photo* album;
     size_t photoCount;
 
+    bool validTimePeriod(Date [2]);
     bool isCreated(const User&) const;
 public:
-    User(char*, char*, Date [2], size_t, char*, Photo*, size_t);
-    User(const User&);
-    User& operator=(const User&);
-    ~User();
-
-    void copyFrom(const User&);
-    void free();
-
-    User& editUser();
-    void saveUser() const;
-    void printUser() const;
-    
     char* getName() const;
     char* getDestination() const;
     const Date* getTimePeriod() const;
@@ -40,5 +29,17 @@ public:
     void setComment(char*);
     void setAlbum(Photo*);
 
+    User(char*, char*, Date [2], size_t, char*, Photo*, size_t);
+    User(const User&);
+    User& operator=(const User&);
+    ~User();
+
+    void copyFrom(const User&);
+    void free();
+
+    User& editUser();
+    void saveUser() const;
+    void printUser() const;
+    void printByDestination(char*) const;
 };
 #endif

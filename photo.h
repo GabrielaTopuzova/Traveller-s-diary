@@ -5,15 +5,15 @@ using namespace std;
 
 class Photo {
     char* name;
-    bool validPhoto(char*) const;
+    bool validPhoto(const char*) const;
 public:
-    Photo();
-    Photo(char*);
-    ~Photo();
-
     char* getName() const;
     void setName(char*);
 
+    Photo();
+    Photo(char*);
+    ~Photo();
+    
     Photo& operator=(const Photo&);
 
     friend istream& operator>>(istream&, Photo&);

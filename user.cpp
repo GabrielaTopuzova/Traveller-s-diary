@@ -3,6 +3,15 @@
 #include "user.h"
 using namespace std;
 
+bool User::validTimePeriod(Date timePeriod[2]) {
+    if(!(timePeriod[0] <= timePeriod[1]))
+        return false;
+    return true;    
+}
+bool User::isCreated(const User& user) const {
+
+}
+
 char* User::getName() const {
     return name;
 }
@@ -32,8 +41,12 @@ void User::setDestination(char* otherDestination) {
     this->destination = new char[strlen(otherDestination)];
     strcpy(destination, otherDestination);
 }
-void setTimePeriod(char [6]) {
-    
+void User::setTimePeriod(Date otherTimePeriod[2]) {
+    if(!validTimePeriod(otherTimePeriod))
+        throw "Not valid time period";
+        
+    timePeriod[0] = otherTimePeriod[0];
+    timePeriod[1] = otherTimePeriod[1];
 }
 void User::setGrade(size_t otherGrade) {
     grade = otherGrade;

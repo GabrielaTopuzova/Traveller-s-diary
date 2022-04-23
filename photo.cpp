@@ -3,8 +3,11 @@
 #include "photo.h"
 using namespace std;
 
-bool Photo::validPhoto(char* photoName) const {
-    return strstr(name + strlen(name) - 4, "png") != nullptr;
+bool Photo::validPhoto(const char* photoName) const {
+    for(size_t i = 0; i < strlen(photoName); i++)
+        //if(photoName[i] < "A")
+    return (strstr(name + strlen(name) - 4, "png") != nullptr) || 
+           (strstr(name + strlen(name) - 5, "jpeg") != nullptr);
 }
 
 char* Photo::getName() const {
@@ -18,11 +21,9 @@ void Photo::setName(char* name) {
 Photo::Photo() {
     name = nullptr;
 }
-
 Photo::Photo(char* photoName) {
     setName(photoName);
 }
-
 Photo::~Photo() {
     delete[] name;
 }

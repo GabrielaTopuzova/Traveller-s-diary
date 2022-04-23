@@ -45,21 +45,15 @@ Date::Date() {
     month = 1;
     year = 0;
 }
-
 Date::Date(size_t day, size_t month, size_t year) {
     setDay(day);
     setMonth(month);
     setYear(year);
 }
-
 Date::Date(const Date& otherDate) {
     day = otherDate.day;
     month = otherDate.month;
     year = otherDate.year;
-}
-
-void Date::consolePrint() const {
-    cout << day << "/" << month << "/" << year;
 }
 
 Date& Date::operator=(const Date& otherDate)
@@ -77,6 +71,10 @@ bool Date::operator<=(const Date& otherDate) const {
 bool Date::operator<(const Date& otherDate) const {
     return otherDate.year > year || (otherDate.year == year && otherDate.month > month) || 
         (otherDate.year == year && otherDate.month == month && otherDate.day > day);
+}
+
+void Date::consolePrint() const {
+    cout << day << "/" << month << "/" << year;
 }
 
 istream& operator>>(istream& stream, Date& date) {

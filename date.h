@@ -19,11 +19,12 @@ public:
     Date();
     Date(size_t, size_t, size_t);
     Date(const Date&);
-    void consolePrint() const;
 
     Date& operator=(const Date&);
     bool operator<=(const Date&) const;
     bool operator<(const Date&) const;
+    
+    void consolePrint() const;
 
     friend istream& operator>>(istream&, Date&);
     friend ostream& operator<<(ostream&, const Date&);
