@@ -1,5 +1,6 @@
 #ifndef __TRAVEL
 #define __TRAVEL
+#include <fstream>
 #include "date.h"
 #include "photo.h"
 
@@ -37,9 +38,8 @@ public:
     void copyFrom(const Travel&);
     void free();
 
-    Travel& editTravel();
-    void saveTravel() const;
+    Travel& add();
     void printTravel() const;
-    void printByDestination(char*) const;
+    void printTravelByDestination(char*) const;
 };
 #endif
