@@ -25,11 +25,11 @@ public:
 
     void copyFrom(const User&);
     void free();
+    
+    void addTravel(const Travel&);
 
-    friend fstream& openFile(fstream&, const User&);
-    friend fstream& closeFile(fstream&, const User&);
-    friend ofstream& saveFile(ofstream&, const User&);
+    void saveToFile(ofstream&) const;
 
-    void printUser();
+    void printUser() const;
 };
 #endif

@@ -44,11 +44,19 @@ User::User(const User& otherUser) {
 User& User::operator=(const User& otherUser) {
     if(this != &otherUser)
     {
-    free();
-    copyFrom(otherUser);
+        free();
+        copyFrom(otherUser);
     }
     return *this;
 }
 User::~User() {
     free();
+}
+
+void User::addTravel(const Travel& addition) {
+    journeyCount++;
+    Travel** result = new Travel*[journeyCount];
+    result = journeys;
+    *result[journeyCount] = addition;
+    journeys = result;
 }

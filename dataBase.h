@@ -14,8 +14,8 @@ public:
     void copyFrom(const DataBase&);
     void free();
 
-    friend fstream& registerNewUser(fstream&, User&);
-    friend fstream& editUser(fstream&, User&);
+    void loadDataBase();
+    void saveDataBase();
 
     void printDataBase();
     void printDataBaseByDestination(char*);

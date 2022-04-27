@@ -4,12 +4,7 @@
 using namespace std;
 
 bool Travel::validTimePeriod(Date timePeriod[2]) {
-    if(!(timePeriod[0] <= timePeriod[1]))
-        return false;
-    return true;    
-}
-bool Travel::isCreated(const Travel& Travel) const {
-
+    return timePeriod[0] <= timePeriod[1];  
 }
 
 char* Travel::getName() const {

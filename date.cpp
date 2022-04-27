@@ -48,7 +48,7 @@ void Date::setYear(size_t year) {
 Date::Date() {
     day = 1;
     month = 1;
-    year = 0;
+    year = 1;
 }
 Date::Date(size_t day, size_t month, size_t year) {
     setDay(day);
@@ -96,4 +96,5 @@ istream& operator>>(istream& stream, Date& date) {
 }
 ostream& operator<<(ostream& stream, const Date& date) {
     stream << date.day << date.month << date.year;
+    return stream;
 }

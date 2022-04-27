@@ -14,7 +14,6 @@ class Travel  {
     size_t photoCount;
 
     bool validTimePeriod(Date [2]);
-    bool isCreated(const Travel&) const;
 public:
     char* getName() const;
     char* getDestination() const;
@@ -38,8 +37,7 @@ public:
     void copyFrom(const Travel&);
     void free();
 
-    Travel& add();
+    void inputTravel();
     void printTravel() const;
-    void printTravelByDestination(char*) const;
 };
 #endif
