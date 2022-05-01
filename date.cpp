@@ -36,13 +36,16 @@ size_t Date::getYear() const {
     return year;
 }
 void Date::setDay(size_t day) {
-    this->day = day;
+    if(validDate(day, month, year))
+        this->day = day;
 }
 void Date::setMonth(size_t month) {
-    this->month = month;
+    if(validDate(day, month, year))
+        this->month = month;
 }
 void Date::setYear(size_t year) {
-    this->year = year;
+    if(validDate(day, month, year))
+        this->year = year;
 }
 
 Date::Date() {
@@ -51,25 +54,13 @@ Date::Date() {
     year = 1;
 }
 Date::Date(size_t day, size_t month, size_t year) {
-    setDay(day);
-    setMonth(month);
-    setYear(year);
-}
-Date::Date(const Date& otherDate) {
-    day = otherDate.day;
-    month = otherDate.month;
-    year = otherDate.year;
+    if(!validDate(day, month, year))
+        throw "Invalid date";
+    this->day = day;
+    this->month = month;
+    this->year = year;
 }
 
-Date& Date::operator=(const Date& otherDate)
-{
-    if(year == otherDate.year && month == otherDate.month && day == otherDate.day)
-        return *this;
-    setDay(otherDate.day);
-    setMonth(otherDate.month);
-    setYear(otherDate.year);
-    return *this;
-}
 bool Date::operator<=(const Date& otherDate) const {
     return *this < otherDate || (otherDate.year == year && otherDate.month == month && otherDate.day == day);
 }
@@ -78,8 +69,11 @@ bool Date::operator<(const Date& otherDate) const {
         (otherDate.year == year && otherDate.month == month && otherDate.day > day);
 }
 
-void Date::consolePrint() const {
-    cout << day << "/" << month << "/" << year;
+void Date::readFromFile(ifstream& file) {
+    file.read((char*) this, sizeof(Date));
+}
+void Date::writeInFile(ofstream& file) const {
+    file.write((const char*) this, sizeof(Date));
 }
 
 istream& operator>>(istream& stream, Date& date) {
@@ -87,14 +81,14 @@ istream& operator>>(istream& stream, Date& date) {
     stream >> inputDay >> inputMonth >> inputYear;
 
     if(!(date.validDate(inputDay, inputMonth, inputYear)))
-        throw "Not valid Date";
+        throw "Invalid date";
         
-    date.setDay(inputDay);
-    date.setMonth(inputMonth);
-    date.setYear(inputYear);
+    date.day = inputDay;
+    date.month = inputMonth;
+    date.year = inputYear;
     return stream;
 }
 ostream& operator<<(ostream& stream, const Date& date) {
-    stream << date.day << date.month << date.year;
+    stream << date.day << "/" << date.month << "/" << date.year;
     return stream;
 }

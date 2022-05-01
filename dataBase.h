@@ -5,6 +5,8 @@
 class DataBase {
     User** users;
     size_t userCount;
+
+    bool userCreated(const char*);
 public:
     DataBase(User**);
     DataBase(const DataBase&);

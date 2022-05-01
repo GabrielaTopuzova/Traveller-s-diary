@@ -1,4 +1,6 @@
 #include "dataBase.h"
+#include "user.h"
+#include <cstring>
 
 void DataBase::copyFrom(const DataBase& otherDatabase) {
     User** copyData = new User*[userCount];

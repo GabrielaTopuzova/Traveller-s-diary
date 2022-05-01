@@ -1,4 +1,5 @@
 #include "user.h"
+#include <cstring>
 
 char* User::getUsername() const {
     return username;
@@ -9,15 +10,21 @@ char* User::getPassword() const {
 char* User::getEmail() const {
     return email;
 }
+Travel** User::getJourneys() const {
+    return journeys;
+}
+size_t User::getJourneyCount() const {
+    return journeyCount;
+}
 void User::setUsername(char* otherUsername) {
     username = new char[strlen(otherUsername) + 1];
     strcpy(username, otherUsername);
 }
-void User::setUsername(char* otherPassword) {
+void User::setPassword(char* otherPassword) {
     password = new char[strlen(otherPassword) + 1];
     strcpy(password, otherPassword);
 }
-void User::setUsername(char* otherEmail) {
+void User::setEmail(char* otherEmail) {
     email = new char[strlen(otherEmail) + 1];
     strcpy(email, otherEmail);
 }
@@ -59,4 +66,20 @@ void User::addTravel(const Travel& addition) {
     result = journeys;
     *result[journeyCount] = addition;
     journeys = result;
+}
+
+void User::saveToFile(ofstream& stream) const {
+    for(size_t i = 0; i < journeyCount; i++)
+    {
+        stream << journeys[i]->getName() << journeys[i]->getDestination();
+        stream << journeys[i]->getTimePeriod() << journeys[i]->getGrade();
+        stream << journeys[i]->getComment() << journeys[i]->getPhotoCount() << journeys[i]->getAlbum(); //
+    }
+}
+
+void User::printUser() const {
+    cout << "Username: " << username << endl;
+    cout << "Email: " << email << endl;
+    for(size_t i = 0; i < journeyCount; i++)
+        journeys[i]->printTravel();
 }

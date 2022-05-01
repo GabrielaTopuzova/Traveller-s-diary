@@ -6,33 +6,39 @@ using namespace std;
 bool Photo::validPhoto(const char* photoName) const {
     for(size_t i = 0; i < strlen(photoName); i++)
         if((photoName[i] < 'A' || photoName[i] > 'Z') && (photoName[i] < 'a' || 
-            photoName[i] > 'z') && photoName[i] != '_' && photoName[i] != '.')
+            photoName[i] > 'z') && photoName[i] != '_' && photoName[i] != '.' 
+            && (photoName[i] < '0' || photoName[i] > '9'))
             return false;
 
     size_t dotCount = 0;
     for(size_t i = 0; i < strlen(photoName); i++)
         if(photoName[i] == '.')
             dotCount++;
+
     if(dotCount != 1)
         return false;
-        
-    return (strcmp(name + strlen(name) - 4, "png") == 0) || 
-           (strcmp(name + strlen(name) - 5, "jpeg") == 0);
+    return (strcmp(photoName + strlen(photoName) - 3, "png") == 0) || 
+           (strcmp(photoName + strlen(photoName) - 4, "jpeg") == 0);
 }
 
-char* Photo::getName() const {
+const char* Photo::getName() const {
     return name;
 }
-void Photo::setName(char* name) {
-    this->name = new char[strlen(name)];
+void Photo::setName(const char* name) {
+    if(!validPhoto(name))
+        throw "Invalid photo";
+    this->name = new char[strlen(name) + 1];
     strcpy(this->name, name);
 }
 
 Photo::Photo() {
     name = nullptr;
 }
-Photo::Photo(char* photoName) {
+Photo::Photo(const char* photoName) {
     setName(photoName);
+}
+Photo::Photo(const Photo& otherPhoto) {
+    setName(otherPhoto.name);
 }
 Photo::~Photo() {
     delete[] name;
@@ -50,8 +56,7 @@ Photo& Photo::operator=(const Photo& otherPhoto) {
 istream& operator>>(istream& stream, Photo& photo) {
     char* name = new char[1024];
     stream >> name;
-    char* result = new char[strlen(name) + 1];
-    strcpy(photo.name, result);
+    photo.setName(name);
     return stream;
 }
 ostream& operator<<(ostream& stream, const Photo& photo) {

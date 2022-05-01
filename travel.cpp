@@ -29,16 +29,18 @@ size_t Travel::getPhotoCount() const {
     return photoCount;
 }
 void Travel::setName(char* otherName) {
-    this->name = new char[strlen(otherName)];
+    delete[] name;
+    name = new char[strlen(otherName) + 1];
     strcpy(name, otherName);
 }
 void Travel::setDestination(char* otherDestination) {
-    this->destination = new char[strlen(otherDestination)];
+    delete[] destination;
+    destination = new char[strlen(otherDestination)];
     strcpy(destination, otherDestination);
 }
 void Travel::setTimePeriod(Date otherTimePeriod[2]) {
     if(!validTimePeriod(otherTimePeriod))
-        throw "Not valid time period";
+        throw "Invalid time period";
         
     timePeriod[0] = otherTimePeriod[0];
     timePeriod[1] = otherTimePeriod[1];
@@ -47,11 +49,16 @@ void Travel::setGrade(size_t otherGrade) {
     grade = otherGrade;
 }
 void Travel::setComment(char* otherComment) {
-    this->comment = new char[strlen(otherComment)];
+    delete[] comment;
+    comment = new char[strlen(otherComment)];
     strcpy(comment, otherComment);
 }
-void Travel::setAlbum(Photo* otherAlbum) {
-    album = otherAlbum;
+void Travel::setAlbum(Photo* otherAlbum, size_t otherPhotoCount) {
+    delete[] album;
+    photoCount = otherPhotoCount;
+    album = new Photo[photoCount];
+    for(size_t i = 0; i < photoCount; i++)
+        album[i] = otherAlbum[i];
 }
 
 void Travel::copyFrom(const Travel& otherTravel) {
@@ -79,6 +86,14 @@ void Travel::free() {
     delete[] album;
 }
 
+Travel::Travel() {
+    name = nullptr;
+    destination = nullptr;
+    grade = 1;
+    comment = nullptr;
+    album = nullptr;
+    photoCount = 0;
+}
 Travel::Travel(char* otherName, char* otherDestination, Date otherTimePeriod[2], size_t otherGrade, char* otherComment, Photo* otherAlbum, size_t otherPhotoCount) {
     name = new char[strlen(otherName) + 1];
     destination = new char[strlen(otherDestination) + 1];
@@ -86,14 +101,16 @@ Travel::Travel(char* otherName, char* otherDestination, Date otherTimePeriod[2],
     strcpy(name, otherName);
     strcpy(destination, otherDestination);
     strcpy(comment, otherComment);
-
+    if(!validTimePeriod(otherTimePeriod))
+        throw "Invalid time period";
     timePeriod[0] = otherTimePeriod[0];
     timePeriod[1] = otherTimePeriod[1];
 
     grade = otherGrade;
     photoCount = otherPhotoCount;
     album = new Photo[photoCount];
-    album = otherAlbum;
+    for(size_t i = 0; i < photoCount; i++)
+        album[i] = otherAlbum[i];
 }
 Travel::Travel(const Travel& otherTravel) { 
     copyFrom(otherTravel);
@@ -108,4 +125,47 @@ Travel& Travel::operator=(const Travel& otherTravel) {
 }
 Travel::~Travel() { 
     free();
+}
+
+void Travel::inputTravel() {
+    free();
+    char* buffer = new char[1024];
+    cout << "Enter destination: ";
+    cin >> buffer;
+    setDestination(buffer);
+
+    Date dateBuffer[2];
+    cout << "Enter time period: ";
+    cin >> dateBuffer[0] >> dateBuffer[1];
+    setTimePeriod(dateBuffer);
+
+    size_t gradeBuffer;
+    cout << "Enter grade from 1 to 5: ";
+    cin >> gradeBuffer;
+    setGrade(gradeBuffer);
+
+    cout << "Enter comment: ";
+    cin >> buffer;
+    setComment(buffer);
+
+    size_t photoCountBuffer;
+    cout << "Enter photo count: ";
+    cin >> photoCountBuffer;
+    photoCount = photoCountBuffer;
+
+    Photo* albumBuffer = new Photo[photoCountBuffer];
+    cout << "Enter photo files: ";
+    for(size_t i = 0; i < photoCountBuffer; i++)
+        cin >> albumBuffer[i];
+    album = albumBuffer;
+}
+
+void Travel::printTravel() const {
+    cout << "Destination: " << destination << endl;
+    cout << "Time period: " << timePeriod[0] << " - " << timePeriod[1] << endl;
+    cout << "Grade: " << grade << endl;
+    cout << "Comment: " << comment << endl;
+    cout << "Photos: ";
+    for(size_t i = 0; i < photoCount; i++)
+        cout << album[i] << endl;
 }

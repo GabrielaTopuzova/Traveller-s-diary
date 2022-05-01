@@ -14,6 +14,9 @@ class Travel  {
     size_t photoCount;
 
     bool validTimePeriod(Date [2]);
+
+    void copyFrom(const Travel&);
+    void free();
 public:
     char* getName() const;
     char* getDestination() const;
@@ -27,15 +30,13 @@ public:
     void setTimePeriod(Date [2]);
     void setGrade(size_t);
     void setComment(char*);
-    void setAlbum(Photo*);
+    void setAlbum(Photo*, size_t);
 
+    Travel();
     Travel(char*, char*, Date [2], size_t, char*, Photo*, size_t);
     Travel(const Travel&);
     Travel& operator=(const Travel&);
     ~Travel();
-
-    void copyFrom(const Travel&);
-    void free();
 
     void inputTravel();
     void printTravel() const;

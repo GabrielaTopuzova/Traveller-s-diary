@@ -7,11 +7,12 @@ class Photo {
     char* name;
     bool validPhoto(const char*) const;
 public:
-    char* getName() const;
-    void setName(char*);
+    const char* getName() const;
+    void setName(const char*);
 
     Photo();
-    Photo(char*);
+    Photo(const char*);
+    Photo(const Photo&);
     ~Photo();
     
     Photo& operator=(const Photo&);

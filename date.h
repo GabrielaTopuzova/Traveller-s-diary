@@ -1,6 +1,7 @@
 #ifndef __DATE
 #define __DATE
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 class Date {
@@ -18,13 +19,12 @@ public:
 
     Date();
     Date(size_t, size_t, size_t);
-    Date(const Date&);
 
-    Date& operator=(const Date&);
     bool operator<=(const Date&) const;
     bool operator<(const Date&) const;
-    
-    void consolePrint() const;
+
+    void readFromFile(ifstream&);
+    void writeInFile(ofstream&) const;
 
     friend istream& operator>>(istream&, Date&);
     friend ostream& operator<<(ostream&, const Date&);
