@@ -32,14 +32,14 @@ void Travel::setDestination(const char* otherDestination) {
 }
 void Travel::setTimePeriod(const Date otherTimePeriod[2]) {
     if(!validTimePeriod(otherTimePeriod))
-        throw "Invalid time period";
+        throw "Invalid time period!";
         
     timePeriod[0] = otherTimePeriod[0];
     timePeriod[1] = otherTimePeriod[1];
 }
 void Travel::setGrade(const size_t otherGrade) {
     if(otherGrade < 1 || otherGrade > 5)
-        throw "Invalid grade";
+        throw "Invalid grade!";
     grade = otherGrade;
 }
 void Travel::setComment(const char* otherComment) {
@@ -93,7 +93,7 @@ Travel::Travel(const char* otherDestination, const Date otherTimePeriod[2], cons
     strcpy(comment, otherComment);
 
     if(!validTimePeriod(otherTimePeriod))
-        throw "Invalid time period";
+        throw "Invalid time period!";
     timePeriod[0] = otherTimePeriod[0];
     timePeriod[1] = otherTimePeriod[1];
 

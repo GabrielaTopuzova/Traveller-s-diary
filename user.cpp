@@ -20,7 +20,7 @@ void User::setUsername(const char* otherUsername) {
     for(size_t i = 0; i < strlen(otherUsername); i++)
         if((otherUsername[i] < 'A' || otherUsername[i] > 'Z') && (otherUsername[i] < 'a' || 
             otherUsername[i] > 'z') && (otherUsername[i] < '0' || otherUsername[i] > '9'))
-            throw "Invalid username";
+            throw "Invalid username!";
 
     delete[] username;
     username = new char[strlen(otherUsername) + 1];

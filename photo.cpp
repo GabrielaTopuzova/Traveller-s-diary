@@ -27,7 +27,7 @@ const char* Photo::getName() const {
 }
 void Photo::setName(const char* name) {
     if(!validPhoto(name))
-        throw "Invalid photo";
+        throw "Invalid photo!";
     delete[] this->name;
     this->name = new char[strlen(name) + 1];
     strcpy(this->name, name);

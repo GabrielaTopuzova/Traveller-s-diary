@@ -56,7 +56,7 @@ Date::Date() {
 }
 Date::Date(const size_t day, const size_t month, const size_t year) {
     if(!validDate(day, month, year))
-        throw "Invalid date";
+        throw "Invalid date!";
     this->day = day;
     this->month = month;
     this->year = year;
@@ -82,7 +82,7 @@ istream& operator>>(istream& stream, Date& date) {
     stream >> inputDay >> inputMonth >> inputYear;
 
     if(!(date.validDate(inputDay, inputMonth, inputYear)))
-        throw "Invalid date";
+        throw "Invalid date!";
         
     date.day = inputDay;
     date.month = inputMonth;
