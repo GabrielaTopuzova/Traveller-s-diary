@@ -17,6 +17,9 @@ public:
     
     Photo& operator=(const Photo&);
 
+    void readFromFile(ifstream&);
+    void saveToFile(ofstream&) const;
+
     friend istream& operator>>(istream&, Photo&);
     friend ostream& operator<<(ostream&, const Photo&);
 };

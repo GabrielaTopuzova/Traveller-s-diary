@@ -5,7 +5,6 @@
 #include "photo.h"
 
 class Travel  {
-    char* name;
     char* destination;
     Date timePeriod[2];
     size_t grade;
@@ -13,30 +12,31 @@ class Travel  {
     Photo* album;
     size_t photoCount;
 
-    bool validTimePeriod(Date [2]);
+    bool validTimePeriod(const Date [2]) const;
 
     void copyFrom(const Travel&);
     void free();
 public:
-    char* getName() const;
-    char* getDestination() const;
+    const char* getDestination() const;
     const Date* getTimePeriod() const;
-    size_t getGrade() const;
-    char* getComment() const;
-    Photo* getAlbum() const;
-    size_t getPhotoCount() const;
-    void setName(char*);
-    void setDestination(char*);
-    void setTimePeriod(Date [2]);
-    void setGrade(size_t);
-    void setComment(char*);
-    void setAlbum(Photo*, size_t);
+    const size_t getGrade() const;
+    const char* getComment() const;
+    const Photo* getAlbum() const;
+    const size_t getPhotoCount() const;
+    void setDestination(const char*);
+    void setTimePeriod(const Date [2]);
+    void setGrade(const size_t);
+    void setComment(const char*);
+    void setAlbum(const Photo*, const size_t);
 
     Travel();
-    Travel(char*, char*, Date [2], size_t, char*, Photo*, size_t);
+    Travel(const char*, const Date [2], const size_t, const char*, const Photo*, const size_t);
     Travel(const Travel&);
     Travel& operator=(const Travel&);
     ~Travel();
+
+    void readFromFile(ifstream&);
+    void saveToFile(ofstream&) const;
 
     void inputTravel();
     void printTravel() const;

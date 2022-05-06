@@ -8,17 +8,18 @@ class Date {
     size_t day;
     size_t month;
     size_t year;
-    bool validDate(size_t, size_t, size_t);
+    
+    bool validDate(const size_t, const size_t, const size_t) const;
 public:
-    size_t getDay() const;
-    size_t getMonth() const;
-    size_t getYear() const;
-    void setDay(size_t);
-    void setMonth(size_t);
-    void setYear(size_t);
+    const size_t getDay() const;
+    const size_t getMonth() const;
+    const size_t getYear() const;
+    void setDay(const size_t);
+    void setMonth(const size_t);
+    void setYear(const size_t);
 
     Date();
-    Date(size_t, size_t, size_t);
+    Date(const size_t, const size_t, const size_t);
 
     bool operator<=(const Date&) const;
     bool operator<(const Date&) const;

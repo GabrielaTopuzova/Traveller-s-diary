@@ -3,23 +3,31 @@
 #include "user.h"
 
 class DataBase {
-    User** users;
+    User* users;
     size_t userCount;
 
-    bool userCreated(const char*);
+    bool userCreated(const char*) const;
+    const char* fileName(const char*) const;
+
+    void copyFrom(const DataBase&);
+    void free();
 public:
-    DataBase(User**);
+    DataBase();
+    DataBase(const User*, const size_t);
     DataBase(const DataBase&);
     DataBase& operator=(const DataBase&);
     ~DataBase();
 
-    void copyFrom(const DataBase&);
-    void free();
+    void loadDataBase(const char*);
+    void saveDataBase(const char*) const;
 
-    void loadDataBase();
-    void saveDataBase();
+    const char* registerUser();
+    const char* logIn();
+    void addTravelToUser(const char*, const Travel&);
 
-    void printDataBase();
-    void printDataBaseByDestination(char*);
+    void printDataBase() const;
+    void printDataBaseByDestination(const char*) const;
+
+    void startProgram();
 };
 #endif

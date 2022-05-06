@@ -1,10 +1,11 @@
 #include <iostream>
+#include <iomanip>
 #include "date.h"
 using namespace std;
 
 size_t lastDayOfMonth(size_t month, size_t year) {
     bool isLeap = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
-    if (month == 4 || month == 6 || month == 9 || month == 11)
+    if(month == 4 || month == 6 || month == 9 || month == 11)
         return 30;
     if(month == 2 && isLeap)
         return 29;
@@ -12,7 +13,7 @@ size_t lastDayOfMonth(size_t month, size_t year) {
         return 28;
     return 31;
 }
-bool Date::validDate(size_t day, size_t month, size_t year) {
+bool Date::validDate(const size_t day, const size_t month, const size_t year) const {
     if(year > 9999 || year < 0) 
         return false;
 
@@ -26,24 +27,24 @@ bool Date::validDate(size_t day, size_t month, size_t year) {
     return true;
 }
 
-size_t Date::getDay() const {
+const size_t Date::getDay() const {
     return day;
 }
-size_t Date::getMonth() const {
+const size_t Date::getMonth() const {
     return month;
 }
-size_t Date::getYear() const {
+const size_t Date::getYear() const {
     return year;
 }
-void Date::setDay(size_t day) {
+void Date::setDay(const size_t day) {
     if(validDate(day, month, year))
         this->day = day;
 }
-void Date::setMonth(size_t month) {
+void Date::setMonth(const size_t month) {
     if(validDate(day, month, year))
         this->month = month;
 }
-void Date::setYear(size_t year) {
+void Date::setYear(const size_t year) {
     if(validDate(day, month, year))
         this->year = year;
 }
@@ -53,7 +54,7 @@ Date::Date() {
     month = 1;
     year = 1;
 }
-Date::Date(size_t day, size_t month, size_t year) {
+Date::Date(const size_t day, const size_t month, const size_t year) {
     if(!validDate(day, month, year))
         throw "Invalid date";
     this->day = day;
@@ -89,6 +90,8 @@ istream& operator>>(istream& stream, Date& date) {
     return stream;
 }
 ostream& operator<<(ostream& stream, const Date& date) {
-    stream << date.day << "/" << date.month << "/" << date.year;
+    stream << setw(2) << setfill('0') << date.day << ".";
+    stream << setw(2) << setfill('0') << date.month << ".";
+    stream << setw(4) << setfill('0') << date.year;
     return stream;
 }
