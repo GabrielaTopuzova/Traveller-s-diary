@@ -5,10 +5,10 @@
 #include "photo.h"
 
 class Travel  {
-    char* destination;
+    String destination;
     Date timePeriod[2];
     size_t grade;
-    char* comment;
+    String comment;
     Photo* album;
     size_t photoCount;
 
@@ -17,20 +17,20 @@ class Travel  {
     void copyFrom(const Travel&);
     void free();
 public:
-    const char* getDestination() const;
+    const String& getDestination() const;
     const Date* getTimePeriod() const;
     const size_t getGrade() const;
-    const char* getComment() const;
+    const String& getComment() const;
     const Photo* getAlbum() const;
     const size_t getPhotoCount() const;
-    void setDestination(const char*);
+    void setDestination(const String&);
     void setTimePeriod(const Date [2]);
     void setGrade(const size_t);
-    void setComment(const char*);
+    void setComment(const String&);
     void setAlbum(const Photo*, const size_t);
 
     Travel();
-    Travel(const char*, const Date [2], const size_t, const char*, const Photo*, const size_t);
+    Travel(const String&, const Date [2], const size_t, const String&, const Photo*, const size_t);
     Travel(const Travel&);
     Travel& operator=(const Travel&);
     ~Travel();

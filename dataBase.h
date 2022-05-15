@@ -6,8 +6,8 @@ class DataBase {
     User* users;
     size_t userCount;
 
-    bool userCreated(const char*) const;
-    const char* fileName(const char*) const;
+    bool userCreated(const String&) const;
+    String fileName(const String&) const;
 
     void copyFrom(const DataBase&);
     void free();
@@ -18,15 +18,15 @@ public:
     DataBase& operator=(const DataBase&);
     ~DataBase();
 
-    void loadDataBase(const char*);
-    void saveDataBase(const char*) const;
+    void loadDataBase(const String&);
+    void saveDataBase(const String&) const;
 
-    const char* registerUser();
-    const char* logIn();
-    void addTravelToUser(const char*, const Travel&);
+    const String& registerUser();
+    const String& logIn();
+    void addTravelToUser(const String&, const Travel&);
 
     void printDataBase() const;
-    void printDataBaseByDestination(const char*) const;
+    void printDataBaseByDestination(const String&) const;
 
     void startProgram();
 };

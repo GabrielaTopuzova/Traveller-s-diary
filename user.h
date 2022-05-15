@@ -3,26 +3,26 @@
 #include "travel.h"
 
 class User {
-    char* username;
-    char* password;
-    char* email;
+    String username;
+    String password;
+    String email;
     Travel** journeys;
     size_t journeyCount;
     
     void copyFrom(const User&);
     void free();
 public:
-    const char* getUsername() const;
-    const char* getPassword() const;
-    const char* getEmail() const;
+    const String& getUsername() const;
+    const String& getPassword() const;
+    const String& getEmail() const;
     Travel** getJourneys() const;
     const size_t getJourneyCount() const;
-    void setUsername(const char*);
-    void setPassword(const char*);
-    void setEmail(const char*);
+    void setUsername(const String&);
+    void setPassword(const String&);
+    void setEmail(const String&);
 
     User();
-    User(const char*, const char*, const char*);
+    User(const String&, const String&, const String&);
     User(const User&);
     User& operator=(const User&);
     ~User();
